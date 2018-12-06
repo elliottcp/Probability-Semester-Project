@@ -12,17 +12,10 @@ THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
   print(sample)
 }
 
-THEFUNCTION("x^2",10,1,5,1)
+THEFUNCTION(pdf = "x^2", n = 10, lower_bound = 0, upper_bound = 1, C = 1)
 
-test <- function(pdf,x) {
-  pdf = "x^3"
-  eval(parse(text = pdf))
-  }
 
-test(x = 2)
-
-pdf_function <- function(pdf,x) {
-    eval(parse(text = pdf))
-    }
-
-pdf_function(pdf = "x^2", x = 5)
+#test... if(is.numeric(x) == FALSE) stop("Warning Message")
+#error test for a custom pdf that's constant.  Run a different set of code then?
+#make sure the pdf integrates to 1.
+#browser function
