@@ -1,3 +1,86 @@
+#While loops will require a for loop too, at least using Matthew Schuelke's method.
+#Read Matt's code.  See how he structures the while loop.  I don't want to write a while loop that depends on the length of the sample vector.This is what's making the function take so long.
+#
+
+test <- function(pdf,x) {
+  pdf = "x^3"
+  eval(parse(text = pdf))
+}
+
+test(x = 2)
+
+pdf_function <- function(pdf,x) {
+  eval(parse(text = pdf))
+}
+
+pdf_function(pdf = "x^2", x = 5)
+
+
+
+THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
+  sample <- c()
+  pdf <- function(x) {pdf}
+  while(length(sample) != n) {
+    x <- runif(1,lower_bound, upper_bound)
+    y <- runif(1,0,C)
+    success <- y < expression(x)
+    sample <- if(success) {
+      append(sample, x)}}
+  print(sample)
+}
+
+THEFUNCTION(x^2,10,0,1,5)
+
+
+expression <- function(pdf,x) {
+  pdf <- function(x) {
+    eval(parse(text = "pdf"))
+  }
+}
+
+
+
+THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
+  sample <- c()
+  pdf <- function(x) {pdf}
+  while(length(sample) != n) {
+    x <- runif(1,lower_bound, upper_bound)
+    y <- runif(1,0,C)
+    success <- y < pdf(x)
+    sample <- if(success) {
+      append(sample, x)}}
+  print(sample)
+}
+
+
+
+THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
+  sample <- c()
+  pdf <- function(x) {pdf}
+  success != TRUE
+  while(success != TRUE)
+    x <- runif(1,lower_bound, upper_bound)
+  y <- runif(1,0,C)
+  success <- y < pdf(x)
+  sample <- if(success) {
+    append(sample, x)}
+  break
+  print(sample)
+}
+
+
+The_Grand_Function <- function(pdf, n, lower_bound, upper_bound, C) {
+  sample = c()
+  pdf <- function(x) {pdf}
+  while(length(sample) != n)
+    x <- runif(1,lower_bound, upper_bound)
+    y <- runif(1,0,C)
+    sample <- if(y < pdf(x)) {
+    append(sample, x)}
+  print(sample)
+}
+
+
 The_Grand_Function <- function(pdf, n, lower_bound, upper_bound, C) {
   sample = c()
   pdf <- function(x) {pdf}
