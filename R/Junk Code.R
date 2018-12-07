@@ -2,6 +2,38 @@
 #Read Matt's code.  See how he structures the while loop.  I don't want to write a while loop that depends on the length of the sample vector.This is what's making the function take so long.
 #
 
+pdf = "exp(-x)"
+pdf_function <- function(x) {
+  eval(parse(text = pdf))
+}
+pdf_function(2)
+lower_bound <- 0
+upper_bound <- 1
+integrate(pdf_function, lower_bound, upper_bound)
+
+
+testing <- function(pdf) {eval(parse(text(pdf = "x^2")))}
+testing(2)
+pdf_function(3)
+
+integrate(pdf_function, 0, 10)
+
+pdf_function(pdf = "x^2",x)
+
+
+test <- function(x) {x^2}
+integrate(test, 0, 100)
+pdf <- function(x) {x^2}
+integrate(pdf_function, 0, 100)
+
+is.integer(11)
+is.numeric(11)
+is.wholenumber(55)
+
+runif(1,2,1)
+
+
+
 test <- function(pdf,x) {
   pdf = "x^3"
   eval(parse(text = pdf))
