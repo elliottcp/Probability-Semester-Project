@@ -14,12 +14,9 @@ THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
 
 THEFUNCTION(pdf = "x^2", n = 10.4, lower_bound = 0, upper_bound = 1, C = 1)
 
-Error_Messages <- function(pdf, n, lower_bound, upper_bound, C) {
+Other_Error_Messages <- function(pdf, n, lower_bound, upper_bound, C) {
   if(n == "Dr. Speegle is the best!") stop("He's so cool!")
   n <- ceiling()
-  integral_of_support <- integrate(pdf_function, lower_bound, upper_bound)
-  if(integral_of_support !=1) stop("The integral of the support is not equal to 1.  Therefore, the pdf is not valid.")
-
   if((n >= 1) == FALSE) stop("n must be positive, like a good attitude.")
   if(is.numeric(lower_bound) == FALSE) stop("Watch out!  You must enter a numeric value for the lower_bound.")
   if(is.numeric(upper_bound) == FALSE) stop("Error: You must enter a numeric value for the upper_bound.")
@@ -27,15 +24,26 @@ Error_Messages <- function(pdf, n, lower_bound, upper_bound, C) {
   if(lower_bound > upper_bound) stop("That's an error.  The lower_bound is greater than the upper_bound.")
 }
 
-library(FuzzyNumbers.Ext.2)
 
-lower_bound <- 0
-upper_bound <- 100
-testing_function <- function(x) x^2
-test_integral <- integrate(testing_function, lower_bound, upper_bound)
 
-cumulative_test_function <- test()
-is.increasing(test_integral, x.bound = c(lower_bound, upper_bound), step = 0.01)
+
+Test_for_valid_pdf <- function(pdf_function, lower_bound, upper_bound) {
+  integral_of_support <- integrate(pdf_function, lower_bound, upper_bound)$value
+  if(integral_of_support !=1) stop("The integral of the support is not equal to 1.  Therefore, the pdf is not valid.")
+  pdf_testing_variable <- lower_bound
+  step <- 0.001
+  while(pdf_testing_variable < upper_bound) {
+    if(pdf_function(pdf_testing_variable) < 0) stop("pdf not valid.  pdf is not positive over the support.")
+    pdf_testing_variable <- pdf_testing_variable + step
+    }
+}
+
+
+
+
+
+
+positive_pdf_test()
 
 
 #test... if(is.numeric(x) == FALSE) stop("Warning Message")

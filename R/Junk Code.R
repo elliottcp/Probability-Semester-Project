@@ -2,6 +2,19 @@
 #Read Matt's code.  See how he structures the while loop.  I don't want to write a while loop that depends on the length of the sample vector.This is what's making the function take so long.
 #
 
+cumulative_numeric_integral <- c()
+cumulative_numeric_integral <- append(cumulative_numeric_integral, test_integral(x))
+
+
+test <- c(1:10)
+is.increasing(test)
+
+if(test_integral(x)-test)
+
+  is.increasing(fun = test_integral, x.bound = c(lower_bound, upper_bound), step = 0.01)
+
+
+
 pdf = "exp(-x)"
 pdf_function <- function(x) {
   eval(parse(text = pdf))
