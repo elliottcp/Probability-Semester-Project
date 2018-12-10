@@ -30,11 +30,39 @@ THEFUNCTION2D <- function(joint_pdf, n, lower_bound_x, upper_bound_x, lower_boun
   replicate(n, sample_function(pdf_function, lower_bound, upper_bound, C))
 }
 
-
-x <- 3
-y <- 7
-test <- cbind(x,y)
-length(test)
-
-
 #The parameters of THEFUNCTION2D will allow for sampling from any 2D distribution defined on a rectangle.
+
+
+x <- c(1,2,3,4,5)
+y <- c(c(1,2,3,4,5)
+
+test <- function(n) {
+  for(i in c(1:n)) {
+    sample <- runif(1,x[i],y[i])
+    print(sample)
+  }
+}
+
+
+test <- function(n) {
+  for(i in c(1:n)) {
+    sum_extra <- x[i]+y[i]
+    sum <- cbind(sum, sum_extra)
+  }
+  print(sum)
+}
+
+
+x[1]+y[1]
+x[2]+y[2]
+x[3]+y[3]
+
+
+test(1)
+test(4)
+test(1) + test(2)
+
+
+
+test(5)
+

@@ -2,6 +2,32 @@
 #Read Matt's code.  See how he structures the while loop.  I don't want to write a while loop that depends on the length of the sample vector.This is what's making the function take so long.
 #
 
+test <- function(n) {
+  for(i in c(1:n)) {
+    sum <- sum(x[i], y[i])
+    print(sum)
+  }
+}
+
+test(4)
+
+
+
+HelloWorld <- function(...) {
+  arguments <- c(...)
+  sum(arguments)
+}
+
+HelloWorld(1,2,3)
+
+test <- function(...) {
+  sample_max <- c(...)
+  for(i in 1:n)
+    sample_table <- cbind(sample_dimension_1, sample_dimension_2)
+  return(sample_table)
+}
+
+
 THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
 
   n <- ceiling(n)
