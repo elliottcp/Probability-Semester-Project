@@ -50,6 +50,13 @@ THEFUNCTION1D(pdf = "x^2", n = 100, lower_bound = -100, upper_bound = 100, C = 1
 THEFUNCTION1D(pdf = "0.1", n = 10, lower_bound = 0, upper_bound = 10, C = 0.2)
 
 
+
+?roxygenise
+
+
+
+
+
 #To-do:
 #error test for a custom pdf that's constant.  Run a different set of code then?
 #browser function
@@ -70,3 +77,9 @@ THEFUNCTION1D(pdf = "0.1", n = 10, lower_bound = 0, upper_bound = 10, C = 0.2)
 #4. Should I try to make a function that produces samples from an n-dimensional joint pdf?
 #-No.  I probably could use an ellipsis, but that's likely not the typical use of an ellipsis.
 
+#Will need the @export roxygenise function.
+#@param, @examples
+#Roxygen comments start with #'.  Each documentation block starts with some text which defines the title, the description, and the details.
+#Tell prof. what my username and package is.
+
+?install_github
