@@ -2,6 +2,107 @@
 #Read Matt's code.  See how he structures the while loop.  I don't want to write a while loop that depends on the length of the sample vector.This is what's making the function take so long.
 #
 
+
+
+integral_of_support <- integrate(pdf_function, lower_bound, upper_bound)$value
+print(integral_of_support)
+str(integral_of_support$value)
+if(integral_of_support !=1) stop("The integral of the support is not equal to 1.  Therefore, the pdf is not valid.")
+
+
+pdf_testing_variable <- -2
+upper_bound <- 10
+
+while(pdf_testing_variable < upper_bound) {
+  if(pdf_function(pdf_testing_variable) < 0) stop("pdf not valid.  pdf is not positive over the support.")
+  pdf_testing_variable <- pdf_testing_variable + step
+}
+
+
+
+
+pdf_function <-function(x) {x^3}
+lower_bound <- 0
+upper_bound <- 10
+test <- -2
+while(test < 5){
+  if(pdf_function(test) < 0) stop("Can't get you off my mind.")
+  test <- test + 0.1
+}
+
+
+pdf_function(test) < 0
+
+
+
+
+
+Test_for_valid_pdf(pdf_function, 0, 3)
+
+test <- !TRUE
+if(test == TRUE) "Wow!" else "Heh"
+
+print(testing_function)
+
+
+
+
+
+Test_for_valid_pdf <- function(pdf, n, lower_bound, upper_bound, C) {
+  integral_of_support <- integrate(pdf_function, lower_bound, upper_bound)
+  if(integral_of_support !=1) stop("The integral of the support is not equal to 1.  Therefore, the pdf is not valid.")
+
+  testing_function <- function(x) {x}
+  integrating_variable <- lower_bound
+  integral_step <- 0.001
+  while(integrating_variable < upper_bound) {
+    test_integral <- function(integrating_variable) {
+      integrate(testing_function, lower_bound, integrating_variable)
+    }
+    next_test_integral <- function(integrating_variable) {
+      integrate(testing_function, lower_bound, integrating_variable + integral_step)
+    }
+    if(test_integral > next_test_integral) break("pdf not valid.  pdf is not positive over the support.") else "pdf is valid."
+  }
+}
+
+
+
+
+
+positive_pdf_test <- function() {
+  lower_bound <- 0
+  upper_bound <- 10
+  integral_step <- 0.001
+  testing_function <- function(x) {x}
+  integrating_variable <- lower_bound
+  while(integrating_variable + integral_step < upper_bound) {
+    test_integral <- function(integrating_variable) {
+      integrate(testing_function, lower_bound, integrating_variable)
+    }
+    next_test_integral <- function(integrating_variable) {
+      integrate(testing_function, lower_bound, integrating_variable + integral_step)
+    }
+    if(test_integral(integrating_variable) > next_test_integral(integrating_variable)) break("pdf not valid.  pdf is not positive over the support.")
+  }
+  print("pdf is valid.")
+}
+
+
+test_integral <- function(integrating_variable) {
+  integrate(testing_function, lower_bound, integrating_variable)
+}
+next_test_integral <- function(integrating_variable) {
+  integrate(testing_function, lower_bound, integrating_variable + integral_step)
+}
+
+test_integral()
+
+
+
+
+
+
 cumulative_numeric_integral <- c()
 cumulative_numeric_integral <- append(cumulative_numeric_integral, test_integral(x))
 
