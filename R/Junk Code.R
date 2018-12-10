@@ -3,6 +3,21 @@
 #
 
 
+is.numeric()
+is.vector()
+
+test <- function(n) {
+  for(i in c(1:n)) {
+    sample <- runif(1,x[i],y[i])
+    print(sample)
+  }
+}
+
+test(5)
+
+
+
+
 
 test <- function(n) {
   for(i in c(1:n)) {

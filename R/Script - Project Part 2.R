@@ -11,62 +11,40 @@ THEFUNCTION2D <- function(joint_pdf, n, lower_bounds, upper_bounds, C) {
   if(length(lower_bounds) != length(upper_bounds)) stop("dimension_lower_bounds must equal dimension_upper_bounds.")
   if(sum(lower_bounds <= upper_bounds) < length(upper_bounds)) stop("lower_bounds values must always be less than upper_bounds values.")
 
+  dimensions <- length(lower_bounds)
+  samples_from_each_dimension <- function(dimensions) {
+    for(i in c(1:dimensions)) {
+      dimensions_sample <- runif(1,lower_bounds[i],upper_bounds[i])
+    }
+  }
   joint_pdf_function <- function(...) {
-    eval(parse(text = joint_pdf))}
+    eval(parse(text = joint_pdf))
+  }
 
-  sample_function <- function(joint_pdf_function, lower_bound_x, upper_bound_y, C) {
+  valid_sample_function <- function(joint_pdf_function, lower_bounds, upper_bounds, C, dimensions) {
     sample <- c()
-    while(length(sample) != 1) {
-      uniform_sample_function <- function(dimensions) {
-        for(i in c(1:dimensions)) {
-          sample <- runif(1,x[i],y[i])
-          print(sample)
-        }
-      }
+    while(length(sample) != dimensions) {
       z <- runif(1, 0, C)
-      success <- z < pdf_function(x,y)
+      success <- z < joint_pdf_function(...)
       if(success) {
-        sample_table <- cbind(x,y)
+        sample_table <- cbind()
         return(sample_table)
       }
     }
   }
-  replicate(n, sample_function(pdf_function, lower_bound, upper_bound, C))
+  replicate(n, valid_sample_function(joint_pdf_function, lower_bounds, upper_bounds, C))
 }
 
 #The parameters of THEFUNCTION2D will allow for sampling from any 2D distribution defined on a rectangle.
 
-
-x <- c(0,1,45,3,4)
-y <- c(1,2,3,4,5)
-
-x<y
-if((x<y) == FALSE) "x<y"
-
-dimensions <- length(x)
-print(dimensions)
-
-uniform_sample_function <- function(dimensions) {
-  for(i in c(1:dimensions)) {
-    sample <- runif(1,x[i],y[i])
-    print(sample)
-  }
+joint_pdf_function <- function(joint_pdf, ...) {
+  eval(parse(text = joint_pdf))
 }
 
-test_function <- function(x=c(n)){
-  if(is.numeric(...) == FALSE) stop("It's not numeric.") else "Nice."
-}
-test_function(x=c(1,2,3,4,5,6))
+x <-
 
-
-is.numeric()
-is.vector()
-
-test <- function(n) {
-  for(i in c(1:n)) {
-    sample <- runif(1,x[i],y[i])
-    print(sample)
-  }
+test <- function(x,...) {
+  x*...
 }
 
-test(5)
+joint_pdf_function("x*y")
