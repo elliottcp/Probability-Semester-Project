@@ -1,0 +1,28 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Rejection Sampling Function for 1-Dimensional Samples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+**Testing**
+
+Look at the following sum function.  
+```{r}
+sum <- function(a,b) {
+  sum <- sum(a,b)
+  print(sum)
+}
+
+sum(2,3)
+
+```
+
+```{r}
+
+```
+

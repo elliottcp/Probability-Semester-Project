@@ -3,6 +3,15 @@
 #
 
 
+add <- function(a,b) {
+  add <- sum(a,b)
+  return(add)
+}
+
+sum(2,3)
+
+
+
 is.numeric()
 is.vector()
 
