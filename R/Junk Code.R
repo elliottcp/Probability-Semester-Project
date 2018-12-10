@@ -2,6 +2,25 @@
 #Read Matt's code.  See how he structures the while loop.  I don't want to write a while loop that depends on the length of the sample vector.This is what's making the function take so long.
 #
 
+
+
+test <- function(n) {
+  for(i in c(1:n)) {
+    sum_table <- cbind(x[i])
+    print(sum_table)
+  }
+}
+
+
+test(1)
+test(4)
+test(5)
+
+
+
+
+
+
 test <- function(n) {
   for(i in c(1:n)) {
     sum <- sum(x[i], y[i])
