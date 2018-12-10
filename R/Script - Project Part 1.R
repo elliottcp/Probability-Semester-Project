@@ -4,7 +4,7 @@ THEFUNCTION1D <- function(pdf, n, lower_bound, upper_bound, C) {
   if((n >= 1) == FALSE) stop("n must be positive, like a good attitude.")
   if(is.numeric(lower_bound) == FALSE) stop("Watch out!  You must enter a numeric value for the lower_bound.")
   if(is.numeric(upper_bound) == FALSE) stop("Watch out! You must enter a numeric value for the upper_bound.")
-  if(is.numeric(C) == FALSE) stop("Be careful.  You must enter a numeric value for C.  Higher values of C will slow the processing time.")
+  if(is.numeric(C) == FALSE) stop("Be careful.  You must enter a numeric value for C.  Greater values of C will slow the processing time.")
   if(lower_bound > upper_bound) stop("That's an error.  The lower_bound is greater than the upper_bound.")
 
   n <- ceiling(n)
@@ -18,7 +18,7 @@ THEFUNCTION1D <- function(pdf, n, lower_bound, upper_bound, C) {
       y <- runif(1, 0, C)
       success <- y < pdf_function(x)
       if(success) {
-        print(x)
+        return(x)
         sample <- append(sample, x)
       }
     }
@@ -27,19 +27,16 @@ THEFUNCTION1D <- function(pdf, n, lower_bound, upper_bound, C) {
 }
 
 
-str(THEFUNCTION1D(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 3, lower_bound = -1, upper_bound = 1, C = 0.4))
+normal_sample <- THEFUNCTION1D(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 10000, lower_bound = -5, upper_bound = 5, C = 0.4)
+mean(normal_sample)
 
+THEFUNCTION1D(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 20, lower_bound = -10, upper_bound = 10, C = 0.4)
 
 
 
 THEFUNCTION1D(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 1, lower_bound = -4, upper_bound = 4, C = 0.4)
 THEFUNCTION1D(pdf = "x^2", n = 100, lower_bound = -100, upper_bound = 100, C = 1)
-
-
-#THEFUNCTION starts getting really slow around 9.
-
-1/((2*pi)^0.5)*exp((-0^2)/2)
-
+THEFUNCTION1D(pdf = "0.1", n = 10, lower_bound = 0, upper_bound = 10, C = 0.2)
 
 
 #To-do:
