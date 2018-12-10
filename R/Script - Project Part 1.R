@@ -1,4 +1,4 @@
-THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
+THEFUNCTION1D <- function(pdf, n, lower_bound, upper_bound, C) {
 
   if(n == "Dr. Speegle is the best!") stop("You bet he is!")
   if((n >= 1) == FALSE) stop("n must be positive, like a good attitude.")
@@ -27,13 +27,13 @@ THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
 }
 
 
-str(THEFUNCTION(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 3, lower_bound = -1, upper_bound = 1, C = 0.4))
+str(THEFUNCTION1D(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 3, lower_bound = -1, upper_bound = 1, C = 0.4))
 
 
 
 
-THEFUNCTION(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 1, lower_bound = -4, upper_bound = 4, C = 0.4)
-THEFUNCTION(pdf = "x^2", n = 100, lower_bound = -100, upper_bound = 100, C = 1)
+THEFUNCTION1D(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 1, lower_bound = -4, upper_bound = 4, C = 0.4)
+THEFUNCTION1D(pdf = "x^2", n = 100, lower_bound = -100, upper_bound = 100, C = 1)
 
 
 #THEFUNCTION starts getting really slow around 9.

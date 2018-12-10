@@ -2,6 +2,34 @@
 #Read Matt's code.  See how he structures the while loop.  I don't want to write a while loop that depends on the length of the sample vector.This is what's making the function take so long.
 #
 
+THEFUNCTION <- function(pdf, n, lower_bound, upper_bound, C) {
+
+  n <- ceiling(n)
+  sample <- c()
+  pdf_function <- function(x) {
+    eval(parse(text = pdf))}
+
+  sample_function <- function(pdf_function, sample, lower_bound, upper_bound) {
+    while(length(sample) != 1) {
+      x <- runif(1,lower_bound, upper_bound)
+      y <- runif(1,0,C)
+      success <- y < pdf_function(x)
+      sample <- if(success) {
+        append(sample, x)}
+    }
+  }
+
+  if(n == "Dr. Speegle is the best!") stop("You bet he is!")
+  if((n >= 1) == FALSE) stop("n must be positive, like a good attitude.")
+  if(is.numeric(lower_bound) == FALSE) stop("Watch out!  You must enter a numeric value for the lower_bound.")
+  if(is.numeric(upper_bound) == FALSE) stop("Watch out! You must enter a numeric value for the upper_bound.")
+  if(is.numeric(C) == FALSE) stop("Be careful.  You must enter a numeric value for C.  Higher values of C will slow the processing time.")
+  if(lower_bound > upper_bound) stop("That's an error.  The lower_bound is greater than the upper_bound.")
+  )
+
+replicate(n, sample_function)
+}
+
 
 
 integral_of_support <- integrate(pdf_function, lower_bound, upper_bound)$value
