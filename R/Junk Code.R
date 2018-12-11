@@ -3,6 +3,35 @@
 #
 
 
+geom_point(aes(color = "gray"))
+
+geom_point(light_sample, aes(x = x, y = y, col = "gray")) + stat_function(fun = pdf)
+
+stat_function(fun = pdf)
+
+fun.1 <- function(x) x^2 + x
+stat_function(fun = fun.1)
+
+
+
+df1 <- data.frame(x = seq(2, 8, by = 2),
+                  y = seq(30, 15, by = -5))
+df2 <- data.frame(x = seq(2, 8, by = 2),
+                  y = seq(12, 24, by = 4))
+
+ggplot(df1, aes(x, log(y))) +
+  geom_line() +
+  geom_line(data = df2, color = "red")
+
+
+
+
+
+
+
+
+
+
 install.packages("devtools")
 library(devtools)
 

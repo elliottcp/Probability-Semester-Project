@@ -1,3 +1,6 @@
+install.packages("devtools")
+library(devtools)
+
 THEFUNCTION2D <- function(joint_pdf, n, lower_bounds, upper_bounds, C) {
 
   if(n == "Dr. Speegle is the best!") stop("You bet he is!")
@@ -43,8 +46,8 @@ joint_pdf_function <- function(joint_pdf, ...) {
 
 x <-
 
-test <- function(x,...) {
-  x*...
-}
+  test <- function(x,...) {
+    x*...
+  }
 
 joint_pdf_function("x*y")

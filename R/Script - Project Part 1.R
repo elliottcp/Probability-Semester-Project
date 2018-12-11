@@ -29,61 +29,17 @@ THEFUNCTION1D <- function(pdf, n = 1, lower_bound = 0, upper_bound = 1, C = 1) {
 
 
 
-#Standard Normal distribution:
-pdf <- function(x) {dnorm(x,0,1)}
-THEFUNCTION1D(pdf, n = 10, lower_bound = -5, upper_bound = 5, C = 0.4)
-
-#Uniform distribution(a=-10, b=10):
-pdf <- function(x) {dunif(x,-10,10)}
-THEFUNCTION1D(pdf, n = 20, lower_bound = -10, upper_bound = 10, C = 0.06)
-
-#Exponential(lambda = 7):
-pdf <- function(x) {dexp(x,7)}
-THEFUNCTION1D(pdf, n = 8, lower_bound = 0, upper_bound = 100, C = 50)
-
-#Gamma(alpha = 12, beta = 0.6)
-pdf <- function(x) {dgamma(x, 12, 0.6)}
-THEFUNCTION1D(pdf, n = 100, lower_bound = 0, upper_bound = 100, C = 50)
-
-#Beta(alpha = 6, beta = 8)
-pdf <- function(x) {dbeta(x,6,8)}
-THEFUNCTION1D(pdf, n = 50, lower_bound = 0, upper_bound = 1, C = 1)
-
-
-
-#Other examples:
-
-THEFUNCTION1D(pdf = "1/((2*pi)^0.5)*exp((-x^2)/2)", n = 1, lower_bound = -4, upper_bound = 4, C = 0.4)
-THEFUNCTION1D(pdf = "x^2", n = 100, lower_bound = -100, upper_bound = 100, C = 1)
-THEFUNCTION1D(pdf = "0.1", n = 10, lower_bound = 0, upper_bound = 10, C = 0.2)
 
 
 
 ?roxygenise
 
-
-
-
-
 #To-do:
-#error test for a custom pdf that's constant.  Run a different set of code then?
-#browser function
 #make man pages and vignettes.
 
-#Have the user create a function(x) from a gamma, beta, ... distribution.
 
 #Pre-office hours.  Looking to talk about:
-#1. allowing the user to enter non-character pdf functions
-#-User must make a function(x) before using my package.
 
-#2. I should treat vignettes like any R markdown file, right?
-#-Yes.  The vignette will be available when the user enters ?package_name.
-
-#3. If the vignettes are what appear when a user enters ?function, then what are the man pages?
-#-The man pages appear with ?function.
-
-#4. Should I try to make a function that produces samples from an n-dimensional joint pdf?
-#-No.  I probably could use an ellipsis, but that's likely not the typical use of an ellipsis.
 
 #Will need the @export roxygenise function.
 #@param, @examples

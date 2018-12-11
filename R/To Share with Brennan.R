@@ -10,7 +10,7 @@ test(2,3,2)
 
 joint_pdf_function <- function(...) {
   ...
-#The above line might be x*2y*z.
+  #The above line might be x*2y*z.
 }
 
 listofdots <- list(...)
