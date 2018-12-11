@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "THEFUNCTION1D"
+author: "Charlie Elliott"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,10 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-**Background** 
+**Sample Rejection Method Overview** 
+
 Rejection sampling is one method of collecting a random sample from along a single dimension.  Rejection sampling works as follows: First, two uniform sample sets are produced, paired, and plotted.  In this case, pairs of samples are produced and plotted 1000 times.  Then, of the 1000 points, only points under the pdf curve are taken as part of the sample.  Any point over the curve is rejected from the sample.  Thus, an X value is proportionally more likely to be accepted as part of the sample if it falls underneath a higher part of the pdf.  The non-rejected points are the product of THEFUNCTION1D.  
 
-Perhaps it will be easiest to understand visually.  First, 1000 uniformly distributed coordinate pairs were generated.  Then, only the 622 points (black) that fall underneath the pdf curve were selected.  The other 378 were rejected (gray).  
+Perhaps it will be easiest to understand visually.  First, 1000 uniformly distributed coordinate pairs were generated.  Then, only about 650 points fall underneath the pdf curve.  These are highlighted in black.  The other 350 were rejected (gray).  
 
 ```{r}
 n <- 1000
@@ -30,7 +31,8 @@ for(i in 1:n) {
   if(dark) dark_sample <- rbind(dark_sample, points[i,]) else light_sample <- rbind(light_sample, points[i,])
 }
 
-str(dark_sample)
+print(nrow(dark_sample))
+print(nrow(light_sample))
 
 names(dark_sample) <- c("X","Y")
 names(light_sample) <- c("X", "Y")
@@ -45,11 +47,82 @@ ggplot(data = dark_sample, aes(X, Y)) +
 ```
 
 
+
+**Sample Rejection Function Parameters** 
+
+Inputs to THEFUNCTION1D include
+*pdf - A valid pdf. 
+*n - The desired number of samples.  
+*lower_bound - The least finite value that the random variable may take.  
+*upper_bound - The greatest finite value that the random variable may take.  
+*C - Any real number greater than every point on the pdf.  
+
+These values are highlighted on the graph below.  This time, however, the pdf is not exponential.  Rather, it is approximately normal (normal, but with finite tails).  
+
+```{r, echo = FALSE}
+
+THEFUNCTION1D <- function(pdf, n = 1, lower_bound = 0, upper_bound = 1, C = 1) {
+
+  if(n == "Dr. Speegle is the best!") stop("You bet he is!")
+  if((n >= 1) == FALSE) stop("n must be positive, like a good attitude.")
+  if(is.numeric(lower_bound) == FALSE) stop("Watch out!  You must enter a numeric value for the lower_bound.")
+  if(is.numeric(upper_bound) == FALSE) stop("Watch out! You must enter a numeric value for the upper_bound.")
+  if(is.numeric(C) == FALSE) stop("Be careful.  You must enter a numeric value for C.  Greater values of C will slow the processing time.")
+  if(lower_bound > upper_bound) stop("That's an error.  The lower_bound is greater than the upper_bound.")
+  n <- ceiling(n)
+
+  sample_function <- function(pdf, lower_bound, upper_bound, C) {
+    sample <- c()
+    while(length(sample) != 1) {
+      x <- runif(1,lower_bound, upper_bound)
+      y <- runif(1, 0, C)
+      success <- y < pdf(x)
+      if(success) {
+        return(x)
+        sample <- append(sample, x)
+      }
+    }
+  }
+  replicate(n, sample_function(pdf, lower_bound, upper_bound, C))
+}
+
+pdf <- function(x) {dnorm(x,0,1)}
+
+n <- 1000
+c <- 0.5
+x <- runif(n,-5,5)
+y <- runif(n,0,c)
+points <- cbind(x, y)
+
+dark_sample <- data.frame()
+light_sample <- data.frame()
+
+for(i in 1:n) {
+  dark <- points[i,2] < pdf(points[i,1])
+  if(dark) dark_sample <- rbind(dark_sample, points[i,]) else light_sample <- rbind(light_sample, points[i,])
+}
+
+names(dark_sample) <- c("X","Y")
+names(light_sample) <- c("light_sample_X", "light_sample_Y")
+C <- function(c) {0.5}
+
+ggplot(data = dark_sample, aes(X, Y)) +
+  geom_point() +
+  geom_point(data = light_sample, aes(light_sample_X,light_sample_Y), color = "gray") +
+  stat_function(fun = pdf) +
+  geom_vline(xintercept = -5, color = "orange") +
+  geom_vline(xintercept = 5, color = "red") +
+  stat_function(fun = C, color ="green")
+
+```
+
+
+
 **Example #1: Standard Normal Distribution**
 ```{r}
 pdf <- function(x) {dnorm(x,0,1)}
 sample <- THEFUNCTION1D(pdf, n = 100000, lower_bound = -5, upper_bound = 5, C = 0.4)
-print(sample)
+head(sample)
 hist(sample)
 ```
 
