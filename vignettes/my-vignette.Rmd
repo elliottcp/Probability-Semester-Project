@@ -11,9 +11,9 @@ vignette: >
 
 **Sample Rejection Method Overview** 
 
-Rejection sampling is one method of collecting a random sample from along a single dimension.  Rejection sampling works as follows: First, two uniform sample sets are produced, paired, and plotted.  In this case, pairs of samples are produced and plotted 1000 times.  Then, of the 1000 points, only points under the pdf curve are taken as part of the sample.  Any point over the curve is rejected from the sample.  Thus, an X value is proportionally more likely to be accepted as part of the sample if it falls underneath a higher part of the pdf.  The non-rejected points are the product of THEFUNCTION1D.  
+Rejection sampling is one method of producing a random sample from along a single dimension.  Rejection sampling works as follows: First, two uniform sample sets are produced, paired, and plotted.  In this case, pairs of samples are produced and plotted 1000 times.  Then, of the 1000 points, only points under the pdf curve are taken as part of the sample.  Any point above the curve is rejected from the sample.  Thus, an X value is proportionally more likely to be accepted as part of the sample if it falls underneath a higher part of the pdf.  The non-rejected points are the product of THEFUNCTION1D.  
 
-Perhaps it will be easiest to understand visually.  First, 1000 uniformly distributed coordinate pairs were generated.  Then, only about 650 points fall underneath the pdf curve.  These are highlighted in black.  The other 350 were rejected (gray).  
+Perhaps it is easiest to understand visually.  First, 1000 uniformly distributed coordinate pairs are generated.  Then, given the pdf exp(-x) and bounds 0 and 1, only about 650 points fall underneath the pdf curve.  These points are highlighted in black.  The other 350 are rejected (gray).  
 
 ```{r}
 n <- 1000
@@ -42,9 +42,11 @@ library(ggplot2)
 ggplot(data = dark_sample, aes(X, Y)) +
   geom_point() + 
   geom_point(data = light_sample, aes(X,Y), color = "gray") +
-  stat_function(fun = pdf)
+  stat_function(fun = pdf) 
 
 ```
+
+
 
 
 
@@ -111,6 +113,8 @@ names(dark_sample) <- c("X","Y")
 names(light_sample) <- c("light_sample_X", "light_sample_Y")
 C <- function(c) {0.5}
 
+library(ggplot2)
+
 ggplot(data = dark_sample, aes(X, Y)) +
   geom_point() +
   geom_point(data = light_sample, aes(light_sample_X,light_sample_Y), color = "gray") +
@@ -135,7 +139,7 @@ hist(sample)
 **Example #2: Uniform distribution(a=-10, b=10)**
 ```{r}
 pdf <- function(x) {dunif(x,-10,10)}
-sample <- THEFUNCTION1D(pdf, n = 20, lower_bound = -10, upper_bound = 10, C = 0.06)
+sample <- THEFUNCTION1D(pdf, n = 200, lower_bound = -10, upper_bound = 10, C = 0.06)
 hist(sample)
 ```
 
@@ -157,7 +161,7 @@ ggplot(sample, aes(sample[,1])) + geom_histogram(binwidth = 0.05)
 **Example #5: Beta(alpha = 6, beta = 8)**
 ```{r}
 pdf <- function(x) {dbeta(x,6,8)}
-sample <- THEFUNCTION1D(pdf, n = 50000, lower_bound = 0, upper_bound = 1, C = 1)
+sample <- THEFUNCTION1D(pdf, n = 50000, lower_bound = 0, upper_bound = 1, C = 5)
 hist(sample)
 ```
 
