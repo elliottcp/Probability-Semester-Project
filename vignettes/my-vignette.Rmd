@@ -28,22 +28,37 @@ light_sample <- data.frame()
 pdf <- function(x) {exp(-x)}
 
 for(i in 1:n) {
-  if(y < pdf(points[i,1])) rbind(dark_sample, points[i,])
-  if(y > pdf(points[i,1])) rbind(light_sample, points[i,])
+  dark <- points[i,2] < pdf(points[i,1])
+  if(dark) dark_sample <- rbind(dark_sample, points[i,]) else light_sample <- rbind(light_sample, points[i,])
 }
 
 print(dark_sample)
 
 library(ggplot2)
-ggplot(data = dark_sample, aes(x = x, y = y)) +
-  geom_point(dark_sample, col = "black") +
-  geom_point(light_sample, col = "gray") +
-  stat_function(fun = pdf)
-  
+
+?ggplot
+
+ggplot(data = dark_sample, aes(x = "x", y = "y")) +
+  geom_point(aes(color = "black"))
+
+geom_point(light_sample, aes(x = x, y = y, col = "gray")) + stat_function(fun = pdf)
+
 stat_function(fun = pdf)
 
 fun.1 <- function(x) x^2 + x
 stat_function(fun = fun.1)
+
+
+
+df1 <- data.frame(x = seq(2, 8, by = 2),
+                  y = seq(30, 15, by = -5))
+df2 <- data.frame(x = seq(2, 8, by = 2),
+                  y = seq(12, 24, by = 4))
+
+ggplot(df1, aes(x, log(y))) + 
+   geom_line() +
+   geom_line(data = df2, color = "red")
+
 ```
 
 
