@@ -9,20 +9,76 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-**Testing**
+**Background** 
+Rejection sampling is one method of collecting a random sample from along a single dimension.  Rejection sampling works as follows: 
+* First, two uniform samples are produced, paired, and plotted.  In this case, pairs of samples were produced and plotted 1000 times.  Each of the x values in this case are 
 
-Look at the following sum function.  
+However, users of this package might be interested in sampling from non-uniform distributions.  In that case, the x values will not be equally likely.  
+
+
 ```{r}
-sum <- function(a,b) {
-  sum <- sum(a,b)
-  print(sum)
+n <- 10
+x <- runif(n,0,1)
+y <- runif(n,0,1)
+points <- cbind(x,y)
+names(points) <- c("x", "y")
+dark_sample <- data.frame()
+light_sample <- data.frame()
+
+pdf <- function(x) {exp(-x)}
+
+for(i in 1:n) {
+  if(y < pdf(points[i,1])) rbind(dark_sample, points[i,])
+  if(y > pdf(points[i,1])) rbind(light_sample, points[i,])
 }
 
-sum(2,3)
+print(dark_sample)
 
+library(ggplot2)
+ggplot(data = dark_sample, aes(x = x, y = y)) +
+  geom_point(dark_sample, col = "black") +
+  geom_point(light_sample, col = "gray") +
+  stat_function(fun = pdf)
+  
+stat_function(fun = pdf)
+
+fun.1 <- function(x) x^2 + x
+stat_function(fun = fun.1)
 ```
 
+
+**Example #1: Standard Normal Distribution**
 ```{r}
-
+pdf <- function(x) {dnorm(x,0,1)}
+sample <- THEFUNCTION1D(pdf, n = 100000, lower_bound = -5, upper_bound = 5, C = 0.4)
+print(sample)
+hist(sample)
 ```
+
+
+**Example #2: Uniform distribution(a=-10, b=10)**
+```{r}
+pdf <- function(x) {dunif(x,-10,10)}
+THEFUNCTION1D(pdf, n = 20, lower_bound = -10, upper_bound = 10, C = 0.06)
+```
+
+**Example #3: Exponential(lambda = 7)**
+```{r}
+pdf <- function(x) {dexp(x,7)}
+THEFUNCTION1D(pdf, n = 8, lower_bound = 0, upper_bound = 100, C = 50)
+```
+
+
+**Example #4: Gamma(alpha = 12, beta = 0.6)**
+```{r}
+pdf <- function(x) {dgamma(x, 12, 0.6)}
+THEFUNCTION1D(pdf, n = 100, lower_bound = 0, upper_bound = 100, C = 50)
+```
+
+**Example #5: Beta(alpha = 6, beta = 8)**
+```{r}
+pdf <- function(x) {dbeta(x,6,8)}
+THEFUNCTION1D(pdf, n = 100, lower_bound = 0, upper_bound = 1, C = 1)
+```
+
 
