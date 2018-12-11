@@ -1,4 +1,5 @@
-#'Check for faulty parameters, such as n less than 1, non-numeric lower_bound, non-numeric upper_bound, non-numeric C, or lower_bound greater than the upper_bound.
+#' THEFUNCTION1D
+#'
 #'@description This function produces a random sample for any given continuous, finite probability distribution.
 #'
 #'@param pdf A probability density function.  The user is responsible for ensuring it is valid.
@@ -17,8 +18,12 @@
 #'
 #'pdf <- function(x) {dunif(x,-10,10)}
 #'sample <- THEFUNCTION1D(pdf, n = 200, lower_bound = -10, upper_bound = 10, C = 0.06)
+#'
+#'If the function produces an error, check for faulty parameters,
+#'such as n less than 1, non-numeric lower_bound, non-numeric
+#'upper_bound, non-numeric C, or lower_bound greater than the upper_bound.
 
-THEFUNCTION1D <- function(pdf, n = 1, lower_bound = 0, upper_bound = 1, C = 1) {
+THEFUNCTION1D <- function(n = 1, pdf, lower_bound = 0, upper_bound = 1, C = 1) {
 
   if(n == "Dr. Speegle is the best!") stop("You bet he is!")
   if((n >= 1) == FALSE) stop("n must be positive, like a good attitude.")

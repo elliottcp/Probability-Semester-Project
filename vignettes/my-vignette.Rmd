@@ -54,9 +54,9 @@ ggplot(data = dark_sample, aes(X, Y)) +
 
 Inputs to THEFUNCTION1D include
 
-*pdf - A valid pdf. 
-
 *n - The desired number of samples.  
+
+*pdf - A valid pdf. 
 
 *lower_bound - The least finite value that the random variable may take.  
 
@@ -68,7 +68,7 @@ These values are highlighted on the graph below.  This time, however, the pdf is
 
 ```{r, echo = FALSE}
 
-THEFUNCTION1D <- function(pdf, n = 1, lower_bound = 0, upper_bound = 1, C = 1) {
+THEFUNCTION1D <- function(n = 1, pdf, lower_bound = 0, upper_bound = 1, C = 1) {
 
   if(n == "Dr. Speegle is the best!") stop("You bet he is!")
   if((n >= 1) == FALSE) stop("n must be positive, like a good attitude.")
@@ -133,7 +133,7 @@ ggplot(data = dark_sample, aes(X, Y)) +
 **Example #1: Standard Normal Distribution**
 ```{r}
 pdf <- function(x) {dnorm(x,0,1)}
-sample <- THEFUNCTION1D(pdf, n = 100000, lower_bound = -5, upper_bound = 5, C = 0.4)
+sample <- THEFUNCTION1D(n = 100000, pdf, lower_bound = -5, upper_bound = 5, C = 0.4)
 head(sample)
 hist(sample)
 ```
@@ -142,14 +142,14 @@ hist(sample)
 **Example #2: Uniform distribution(a=-10, b=10)**
 ```{r}
 pdf <- function(x) {dunif(x,-10,10)}
-sample <- THEFUNCTION1D(pdf, n = 200, lower_bound = -10, upper_bound = 10, C = 0.06)
+sample <- THEFUNCTION1D(n = 200, pdf, lower_bound = -10, upper_bound = 10, C = 0.06)
 hist(sample)
 ```
 
 **Example #3: Exponential(lambda = 7)**
 ```{r}
 pdf <- function(x) {dexp(x,7)}
-sample <- THEFUNCTION1D(pdf, n = 60, lower_bound = 0, upper_bound = 100, C = 50)
+sample <- THEFUNCTION1D(n = 60, pdf, lower_bound = 0, upper_bound = 100, C = 50)
 hist(sample)
 ```
 
@@ -157,14 +157,14 @@ hist(sample)
 **Example #4: Gamma(alpha = 12, beta = 0.6)**
 ```{r}
 pdf <- function(x) {dgamma(x, 12, 0.6)}
-sample <- data.frame(THEFUNCTION1D(pdf, n = 10000, lower_bound = 0, upper_bound = 50, C = 0.5))
+sample <- data.frame(THEFUNCTION1D(n = 10000, pdf, lower_bound = 0, upper_bound = 50, C = 0.5))
 ggplot(sample, aes(sample[,1])) + geom_histogram(binwidth = 0.05)
 ```
 
 **Example #5: Beta(alpha = 6, beta = 8)**
 ```{r}
 pdf <- function(x) {dbeta(x,6,8)}
-sample <- THEFUNCTION1D(pdf, n = 50000, lower_bound = 0, upper_bound = 1, C = 5)
+sample <- THEFUNCTION1D(n = 50000, pdf, lower_bound = 0, upper_bound = 1, C = 5)
 hist(sample)
 ```
 
