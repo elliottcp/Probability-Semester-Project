@@ -115,13 +115,16 @@ C <- function(c) {0.5}
 
 library(ggplot2)
 
+print("THEFUNCTION1D(pdf, n = 1000, lower_bound = -1, upper_bound = 5, C = 0.5")
+
 ggplot(data = dark_sample, aes(X, Y)) +
   geom_point() +
   geom_point(data = light_sample, aes(light_sample_X,light_sample_Y), color = "gray") +
   stat_function(fun = pdf) +
   geom_vline(xintercept = -5, color = "orange") +
   geom_vline(xintercept = 5, color = "red") +
-  stat_function(fun = C, color ="green")
+  stat_function(fun = C, color ="green") +
+  ggtitle("THEFUNCTION1D(pdf, n = 1000, lower_bound = -1, upper_bound = 5, C = 0.5")
 
 ```
 

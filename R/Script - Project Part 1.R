@@ -35,11 +35,6 @@ THEFUNCTION1D <- function(pdf, n = 1, lower_bound = 0, upper_bound = 1, C = 1) {
 ?roxygenise
 
 #To-do:
-#make man pages and vignettes.
-
-
-#Pre-office hours.  Looking to talk about:
-
 
 #Will need the @export roxygenise function.
 #@param, @examples
