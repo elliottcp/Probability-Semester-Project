@@ -10,14 +10,12 @@ vignette: >
 ---
 
 **Background** 
-Rejection sampling is one method of collecting a random sample from along a single dimension.  Rejection sampling works as follows: 
-* First, two uniform samples are produced, paired, and plotted.  In this case, pairs of samples were produced and plotted 1000 times.  Each of the x values in this case are 
+Rejection sampling is one method of collecting a random sample from along a single dimension.  Rejection sampling works as follows: First, two uniform sample sets are produced, paired, and plotted.  In this case, pairs of samples are produced and plotted 1000 times.  Then, of the 1000 points, only points under the pdf curve are taken as part of the sample.  Any point over the curve is rejected from the sample.  Thus, an X value is proportionally more likely to be accepted as part of the sample if it falls underneath a higher part of the pdf.  The non-rejected points are the product of THEFUNCTION1D.  
 
-However, users of this package might be interested in sampling from non-uniform distributions.  In that case, the x values will not be equally likely.  
-
+Perhaps it will be easiest to understand visually.  First, 1000 uniformly distributed coordinate pairs were generated.  Then, only the 622 points (black) that fall underneath the pdf curve were selected.  The other 378 were rejected (gray).  
 
 ```{r}
-n <- 10
+n <- 1000
 x <- runif(n,0,1)
 y <- runif(n,0,1)
 points <- cbind(x,y)
@@ -32,32 +30,17 @@ for(i in 1:n) {
   if(dark) dark_sample <- rbind(dark_sample, points[i,]) else light_sample <- rbind(light_sample, points[i,])
 }
 
-print(dark_sample)
+str(dark_sample)
+
+names(dark_sample) <- c("X","Y")
+names(light_sample) <- c("X", "Y")
 
 library(ggplot2)
 
-?ggplot
-
-ggplot(data = dark_sample, aes(x = "x", y = "y")) +
-  geom_point(aes(color = "black"))
-
-geom_point(light_sample, aes(x = x, y = y, col = "gray")) + stat_function(fun = pdf)
-
-stat_function(fun = pdf)
-
-fun.1 <- function(x) x^2 + x
-stat_function(fun = fun.1)
-
-
-
-df1 <- data.frame(x = seq(2, 8, by = 2),
-                  y = seq(30, 15, by = -5))
-df2 <- data.frame(x = seq(2, 8, by = 2),
-                  y = seq(12, 24, by = 4))
-
-ggplot(df1, aes(x, log(y))) + 
-   geom_line() +
-   geom_line(data = df2, color = "red")
+ggplot(data = dark_sample, aes(X, Y)) +
+  geom_point() + 
+  geom_point(data = light_sample, aes(X,Y), color = "gray") +
+  stat_function(fun = pdf)
 
 ```
 
