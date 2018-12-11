@@ -3,6 +3,20 @@
 #
 
 
+
+ggplot(data = dark_sample, aes(X, Y)) +
+  geom_point() +
+  geom_point(data = light_sample, aes(light_sample_X,light_sample_Y), color = "gray") +
+  stat_function(fun = pdf) +
+  geom_vline(xintercept = -5, color = "orange") +
+  geom_vline(xintercept = 5, color = "red") +
+  stat_function(fun = C, color ="green") +
+  scale_color_manual(name = "Legend", values = c("pdf" = "black", "C" = "green"), values = c("Accepted Points", "Rejected Points", "pdf", "lower_bound", "upper_bound", "C"))
+
+
+
+
+
 geom_point(aes(color = "gray"))
 
 geom_point(light_sample, aes(x = x, y = y, col = "gray")) + stat_function(fun = pdf)
