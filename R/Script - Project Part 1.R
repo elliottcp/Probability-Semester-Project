@@ -18,7 +18,6 @@
 #'pdf <- function(x) {dunif(x,-10,10)}
 #'sample <- THEFUNCTION1D(pdf, n = 200, lower_bound = -10, upper_bound = 10, C = 0.06)
 
-roxygen2::roxygenise(
 THEFUNCTION1D <- function(pdf, n = 1, lower_bound = 0, upper_bound = 1, C = 1) {
 
   if(n == "Dr. Speegle is the best!") stop("You bet he is!")
@@ -42,4 +41,4 @@ THEFUNCTION1D <- function(pdf, n = 1, lower_bound = 0, upper_bound = 1, C = 1) {
     }
   }
   replicate(n, sample_function(pdf, lower_bound, upper_bound, C))
-})
+}
